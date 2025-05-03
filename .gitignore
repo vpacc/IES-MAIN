@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+uploads/
+.cursor
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+
+# Hệ điều hành
+.DS_Store
