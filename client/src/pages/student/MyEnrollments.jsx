@@ -15,7 +15,7 @@ const MyEnrollments = () => {
         try {
             const token = await getToken();
 
-            // Use Promise.all to handle multiple async operations
+            // Sử dụng Promise.all để xử lý nhiều hoạt động bất đồng bộ
             const tempProgressArray = await Promise.all(
                 enrolledCourses.map(async (course) => {
                     const { data } = await axios.post(

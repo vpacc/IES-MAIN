@@ -6,11 +6,11 @@ import Course from "../models/Course.js";
 
 
 
-// API Controller Function to Manage Clerk User with database
+// Chức năng điều khiển API để quản lý người dùng nhân viên với cơ sở dữ liệu
 export const clerkWebhooks = async (req, res) => {
   try {
 
-    // Create a Svix instance with clerk webhook secret.
+    // Tạo một phiên bản Svix với secret webhook key của nhân viên.
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET)
 
     // Verifying Headers

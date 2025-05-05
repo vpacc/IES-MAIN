@@ -70,13 +70,14 @@ export const AppContextProvider = (props) => {
     // Fetch UserData 
     const fetchUserData = async () => {
         try {
-            // Make sure user exists before accessing its properties
+            // Đảm bảo người dùng tồn tại trước khi truy cập vào chức vụ của người dùng đó
+
             if (!user) {
                 console.log("User not loaded yet, skipping fetchUserData");
                 return;
             }
 
-            // Check if user has publicMetadata and it contains role property
+            // Kiểm tra xem người dùng có publicMetadata và nó có chứa thuộc tính 'role: educator' không
             if (user.publicMetadata && user.publicMetadata.role === 'educator') {
                 setIsEducator(true)
             }
@@ -99,7 +100,7 @@ export const AppContextProvider = (props) => {
 
         } catch (error) {
             console.error("Error fetching user data:", error);
-            // Don't show toast error on page refresh/initial load
+            // Không hiển thị lỗi toast khi làm mới trang/tải lần đầu
             if (error.message !== "Cannot read properties of null (reading 'publicMetadata')") {
                 toast.error(error.message)
             }
@@ -109,7 +110,7 @@ export const AppContextProvider = (props) => {
     // Fetch User Enrolled Courses
     const fetchUserEnrolledCourses = async () => {
         try {
-            // Make sure user exists before trying to fetch courses
+            // Đảm bảo người dùng tồn tại trước khi cố gắng tìm kiếm khóa học
             if (!user) {
                 console.log("User not loaded yet, skipping fetchUserEnrolledCourses");
                 return;
@@ -133,14 +134,14 @@ export const AppContextProvider = (props) => {
 
         } catch (error) {
             console.error("Error fetching enrolled courses:", error);
-            // Only show toast for non-auth related errors
+            // Chỉ hiển thị toast cho các lỗi không liên quan đến xác thực
             if (!error.message.includes("Cannot read properties of null")) {
                 toast.error(error.message)
             }
         }
     }
 
-    // Function to Calculate Course Chapter Time
+    // Chức năng tính thời gian chương trình học
     const calculateChapterTime = (chapter) => {
 
         let time = 0
@@ -151,7 +152,7 @@ export const AppContextProvider = (props) => {
 
     }
 
-    // Function to Calculate Course Duration
+    // Chức năng tính thời lượng khóa học
     const calculateCourseDuration = (course) => {
 
         let time = 0

@@ -11,7 +11,7 @@ const Loading = () => {
         navigate(`/${path}`);
       }, 5000);
 
-      // Cleanup the timer on component unmount
+      
       return () => clearTimeout(timer);
     }
   }, []);

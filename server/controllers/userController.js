@@ -76,12 +76,12 @@ export const purchaseCourse = async (req, res) => {
 
         const newPurchase = await Purchase.create(purchaseData)
 
-        // Stripe Gateway Initialize
+        // Khởi tạo Stripe Gateway
         const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY)
 
         const currency = process.env.CURRENCY.toLocaleLowerCase()
 
-        // Creating line items to for Stripe
+        // Tạo các mục hàng cho Stripe
         const line_items = [{
             price_data: {
                 currency,

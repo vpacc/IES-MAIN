@@ -23,7 +23,7 @@ const App = () => {
   return (
     <div className="text-default min-h-screen bg-white">
       <ToastContainer />
-      {/* Render Student Navbar only if not on educator routes */}
+      {/* Render student navbar chỉ khi không theo tuyến giáo dục */}
       {!isEducatorRoute && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />

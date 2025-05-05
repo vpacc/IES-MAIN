@@ -193,22 +193,56 @@ const Player = ({ }) => {
         </div>
 
       </div>
-
+   
+  
       <div className='md:mt-10'>
-        {
-          playerData
-            ? (
-              <div>
-                <YouTube iframeClassName='w-full aspect-video' videoId={playerData.lectureUrl.split('/').pop()} />
-                <div className='flex justify-between items-center mt-1'>
-                  <p className='text-xl '>{playerData.chapter}.{playerData.lecture} {playerData.lectureTitle}</p>
-                  <button onClick={() => markLectureAsCompleted(playerData.lectureId)} className='text-blue-600'>{progressData && progressData.lectureCompleted.includes(playerData.lectureId) ? 'Hoàn thành' : 'Đánh dấu hoàn thành'}</button>
-                </div>
-              </div>
-            )
-            : <img src={courseData ? courseData.courseThumbnail : ''} alt="" />
-        }
+  {playerData ? (
+    
+    <div>
+      <div 
+        className="relative cursor-pointer bg-gray-200 aspect-video"
+        onClick={() => {
+          // Xử lý trích xuất video ID từ các định dạng URL khác nhau
+          const getVideoId = (url) => {
+            const match = url.match(/[?&]v=([^&]+)/) || url.match(/youtu.be\/([^?]+)/);
+            return match ? match[1] : null;
+          };
+          
+          const videoId = getVideoId(playerData.lectureUrl);
+          if (videoId) {
+            window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+          }
+        }}
+      >
+        {/* Hiển thị thumbnail video */}
+        <img 
+          src={`https://img.youtube.com/vi/${playerData.lectureUrl.split('v=')[1]}/0.jpg`} 
+          alt="Video thumbnail" 
+          className="w-full h-full object-cover"
+        />
+        {/* Nút play overlay */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <svg className="w-20 h-20 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
       </div>
+
+      <div className="flex justify-between items-center mt-1">
+        <p className="text-xl">{playerData.chapter}.{playerData.lecture} {playerData.lectureTitle}</p>
+        <button 
+          onClick={() => markLectureAsCompleted(playerData.lectureId)} 
+          className="text-blue-600"
+        >
+          {progressData?.lectureCompleted?.includes(playerData.lectureId) ? 'Hoàn thành' : 'Đánh dấu hoàn thành'}
+        </button>
+      </div>
+    </div>
+  ) : (
+    <img src={courseData?.courseThumbnail || ''} alt="" />
+  )}
+</div>
+
     </div>
     <Footer />
     </>

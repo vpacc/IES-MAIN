@@ -7,7 +7,7 @@ const connectDB = async () => {
         mongoose.connection.on('connected', () => console.log('Database Connected'));
         mongoose.connection.on('error', (err) => console.log('MongoDB Connection Error: ', err));
 
-        // Connect to MongoDB without appending "/lms" - use the database name from your connection string
+        // Kết nối với MongoDB mà không cần thêm "/ies" - sử dụng tên cơ sở dữ liệu từ chuỗi kết nối 
         await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true
@@ -16,7 +16,7 @@ const connectDB = async () => {
         console.log('MongoDB Connected Successfully');
     } catch (error) {
         console.error('Error connecting to MongoDB:', error.message);
-        process.exit(1); // Exit process with failure
+        process.exit(1); // 
     }
 }
 
